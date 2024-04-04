@@ -12,5 +12,16 @@ services:
       POSTGRES_DB: simpleCrudDb
     volumes:
       - crudData:/var/lib/postgresql/data
+  app:
+    image: simplecrud
+    build: .
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      - PG_HOST=db
+      - PG_USERNAME=admin
+      - PG_PASSWORD=admin
 volumes:
   crudData:
