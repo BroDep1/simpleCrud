@@ -29,10 +29,10 @@ public class Controller {
     }
 
     @PutMapping("/{id}")
-    void edit(@PathVariable Long id, @RequestBody String name) throws NullPointerException{
-        User user = new User();
+    void edit(@PathVariable Long id, @RequestBody User user) throws NullPointerException{
+        if (userRepo.findById(id).isEmpty())
+            return;
         user.setId(id);
-        user.setName(name);
         userRepo.save(user);
     }
 
